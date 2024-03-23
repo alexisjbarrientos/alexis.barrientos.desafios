@@ -3,12 +3,12 @@ class ProductoManager {
         this.productos = []
     }
     agregarProductos(title,description,price,thumbnail,code,stock){
-
+        //Validar campos
         if (!title || !description || !price || !thumbnail || !code || !stock) {
             console.error ("Todos los campos son obligatorios")
             return
         }
-        
+        //Validar producto
         const productoExistente =this.productos.find(producto=>producto.code === code)
         if (productoExistente) {
             console.error(" el producto ya eexiste.")
