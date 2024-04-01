@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node --watch DesafioECMAScript/app.js"
+    "start": "node --watch DesafioManejoDeArchivos/user.js"
   },
   "keywords": [],
   "author": "",
