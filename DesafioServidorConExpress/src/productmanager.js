@@ -90,9 +90,6 @@ class productoManager {
 module.exports = productoManager;
 
 
-module.exports = productoManager;
-
-
 
 
 
