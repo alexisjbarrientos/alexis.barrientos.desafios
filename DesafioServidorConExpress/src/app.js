@@ -6,10 +6,10 @@ const PORT = 8080
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
-const productosManager = new productoManager()
+const productosManager = new productoManager('./productos.json')
 app.get('/productos', async (req, res) => {
     try {
-        let productos = await productosManager.leerProductos();
+        const productos = await productosManager.leerProductos();
         
         if (req.query.limite) {
             const limite = parseInt(req.query.limite);
