@@ -5,18 +5,26 @@ import User from '../models/user.js'
 const routerS = Router()
 
 routerS.post('/register', async (req, res) => {
-const { first_name, last_name, email, age, password } = req.body;
+const { first_name, last_name, email, age, password,role } = req.body;
     try {
         const newUser = new User({
             first_name,
             last_name,
             email,
             age,
-            password: createHash(password)
-        });
+            password: createHash(password),
+            role
+        })
         await newUser.save()
-        res.redirect('/login')
+        if (newUser.role ==='admin') {
+            return res.redirect('/realTimeProducts')
+        }
+        else{
+            
+            res.redirect('/')
+        }
     } catch (err) {
+        console.log('Error al registrar usuario:', err)
         res.status(500).send('Error al registrar usuario')
     } 
     }
@@ -37,9 +45,16 @@ routerS.post('/login', async (req, res) => {
             last_name: user.last_name,
             email: user.email,
             age: user.age,
+            role: user.role
         }
         console.log(req.session.user)
-        res.redirect('/profile')
+        if (user.role ==='admin') {
+            return res.redirect('/realTimeProducts')
+        }
+        else{
+            
+            res.redirect('/')
+        }
 
     } catch (err) {
         res.status(500).send('Error al iniciar sesión')

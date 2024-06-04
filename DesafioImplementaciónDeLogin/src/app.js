@@ -1,12 +1,11 @@
 import express from 'express'
 import handlebars from 'express-handlebars'
-import { Server } from 'socket.io'
 import mongoose from 'mongoose'
-import cookieParser from 'cookie-parser'
+import { Server } from 'socket.io'
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
-import bodyParser from 'body-parser'
 import dotenv from 'dotenv'
+
 
 import __dirname from './utils.js'
 import ProductManager from './class/productManager.js'
@@ -16,27 +15,31 @@ import routerV from './router/view.router.js'
 import routerS from './router/session.router.js'
 
 dotenv.config()
-console.log(process.env.MONGO_URL)
+
 const app = express()
 const PORT = 8080
 
 const httpServer = app.listen(PORT, () => {
     console.log(`El servidor está funcionando correctamente en el puerto ${PORT}`);
 })
+mongoose.connect(process.env.MONGO_URL)
+    .then(() => { console.log("Conectado a la base de datos") })
+    .catch(error => console.error("Error en la conexion", error))
 
 app.use(session({
-    store: MongoStore.create({ mongoUrl: process.env.MONGO_URL }),
+    store: MongoStore.create({ 
+    mongoUrl: process.env.MONGO_URL}),
     secret: 'secretkey',
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
+    
 }))
 const manager = new ProductManager(__dirname + '/dataBase/Productos.json')
 
+
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-app.use(cookieParser())
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+
 
 
 // Handlebars
