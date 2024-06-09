@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node --watch DesafioImplementaciónDeLogin/src/app.js"
+    "start": "node --watch DesafioRefactorANuestroLogin/src/app.js"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,9 @@
     "express-session": "^1.18.0",
     "mongodb": "^6.7.0",
     "mongoose": "^8.4.0",
+    "passport": "^0.7.0",
+    "passport-github2": "^0.1.12",
+    "passport-local": "^1.0.0",
     "session-file-store": "^1.5.0",
     "socket.io": "^4.7.5"
   }
