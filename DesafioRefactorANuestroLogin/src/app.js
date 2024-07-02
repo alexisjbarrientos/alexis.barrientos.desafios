@@ -39,7 +39,11 @@ const httpServer = app.listen(PORT, () => {
 }))
 
 startPassport()
+<<<<<<< HEAD
 app.use(passport.startPassport())
+=======
+app.use(passport.initialize())
+>>>>>>> 87de8b7e020addaece4965604460803075eb93b2
 app.use(passport.session())
 
 app.use(express.urlencoded({ extended: true }))
